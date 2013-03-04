@@ -7,9 +7,9 @@
 client::client(QString ip)
 {
 cli=new QTcpSocket(this);
-cli->connectToHost(ip,9985);
+cli->connectToHost(ip,9982);
 
-if(cli->waitForConnected(3000))
+if(cli->waitForConnected(10000))
   {this->start();}
 else
  {qDebug()<<"not connecting";}
