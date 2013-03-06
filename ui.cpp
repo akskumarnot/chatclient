@@ -46,6 +46,7 @@ if((le->hasFocus()==true) && (e->key()==Qt::Key_Return))
     		 {
        			if(sender==NULL)
         			 { sender=new client(ip);
+				  connect(sender,SIGNAL(sendtomain(QString)),this,SLOT(rAtMain(QString)));
                                    connect(this,SIGNAL(takethis(QString)),sender,SLOT(tookthis(QString)));
                                   }
       			 else

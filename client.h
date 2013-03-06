@@ -12,8 +12,12 @@ client(QString ip);
 
 public slots:
 void tookthis(QString);
+void dosomething();
 private:
 QTcpSocket *cli;
+
+signals:
+void sendtomain(QString);
 
 protected:
 void run();

@@ -10,7 +10,9 @@ cli=new QTcpSocket(this);
 cli->connectToHost(ip,9982);
 
 if(cli->waitForConnected(10000))
-  {this->start();}
+  {
+connect(cli,SIGNAL(readyRead()),this,SLOT(dosomething()));
+this->start();}
 else
  {qDebug()<<"not connecting";}
 }
@@ -25,7 +27,8 @@ exec();
 
 
 void client::tookthis(QString str)
-{  cli->flush();
+{  
+   cli->flush();
    QByteArray arr;
    QDataStream stream(&arr,QIODevice::WriteOnly);
    stream<<str;
@@ -34,6 +37,16 @@ void client::tookthis(QString str)
 }
 
 
+void client::dosomething()
+{
+cli->flush();
+qDebug()<<"used";
+QDataStream stream(cli);
+QString str;
+stream>>str;
+emit sendtomain(str);
+cli->flush();
+}
 
 
 
